@@ -47,15 +47,19 @@ class PhotoMap extends React.Component {
 
       return (
         <article className="details">
-          <div className="detailsPhotoBox">
-            <MapContainer lat={this.lat} long={this.long} />
+          <div className="mapView">
+            <div className="mapElement">
+              <MapContainer lat={this.lat} long={this.long} />
+            </div>
+            <div className="mapInfo">
             <img src={imgURL + photo.path} alt={photo.title} />
-            <h1>{photo.title}</h1>
-            <h2>{photo.city}, {photo.country}</h2>
-            <h1>{this.calculateDist(photo.latitude, 0, photo.longitude, 0)}</h1>
-            <br />
-            <button>View</button>
-            <button>Edit</button>
+              <h1>{photo.title}</h1>
+              <h2>{photo.city}, {photo.country}</h2>
+              <h1>{this.calculateDist(photo.latitude, 0, photo.longitude, 0)}</h1>
+              <br />
+              <button>View</button>
+              <button>Edit</button>
+            </div>
           </div>
         </article>
       );
