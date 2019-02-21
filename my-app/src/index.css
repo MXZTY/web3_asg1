@@ -188,3 +188,7 @@ legend {
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.photos>input{
+  width: 100%;
+}
