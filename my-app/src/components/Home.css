@@ -8,7 +8,7 @@ body {
    font-weight: normal;
    text-transform: uppercase;
    letter-spacing: 4px;
-   margin-bottom: 150px;
+   margin-bottom: 10px;
  }
 
  .banner h1, .banner h3, .banner p {
@@ -20,15 +20,15 @@ body {
 
  .banner {
    color: white;
-   background: url('projectLogo.png') top left/cover no-repeat;
+   background: url('./images/evgeni-tcherkasski-1379407-unsplash.jpg') top left/cover no-repeat;
    height: 900px;
    display: flex;
    justify-content: center;
    align-items: center;
  }
- 
+
  .banner p {
-    margin-top: 550px;
+    margin-top: 0px;
  }
  
  .banner button {
@@ -43,7 +43,7 @@ body {
    font-weight: normal;
    text-transform: uppercase;
    letter-spacing: 4px;
-   margin-bottom: 100px;
+   margin-bottom: 50px;
  }
  
  .bannerAbout h1, .bannerAbout h3, .bannerAbout p {
@@ -55,7 +55,7 @@ body {
 
  .bannerAbout {
   color: white;
-  background: url('projectLogo.png') top left/cover no-repeat;
+  background: url('./images/projectLogo.png') top left/cover no-repeat;
   height: 900px;
   display: flex;
   justify-content: center;
@@ -63,11 +63,27 @@ body {
  }
 
  .bannerAbout p {
-  margin-top: 2.75em;
+  margin-top: 400px;
+  justify-content: left;
+  align-items: left;
 }
 
 .bannerAbout button {
+  margin-top: 150px;
   font-size: 1.75rem;
   padding: 0.5em;
+
+}
+
+.logo {
+  z-index: 10;
+  display: flex;
+  overflow: none;
+  height: 300px;
+  width: auto;
+  padding-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  
 
 }
