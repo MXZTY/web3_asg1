@@ -29,7 +29,7 @@ class Browser extends Component {
     renderEdit = () => {
         // this.setState({isEdit: true, isMap: false});
         return(
-            < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setEdit={this.setEdit} />
+            < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setMap={this.setMap} setView={this.setView}/>
             );
         }
 
@@ -43,7 +43,7 @@ class Browser extends Component {
     renderMap = () => {
         // this.setState({isEdit: false, isMap: true});
         return(
-            <PhotoMap photos={this.props.photos} currentPhoto={this.state.currentPhoto}/> 
+            <PhotoMap photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit} setView={this.setView}/> 
         );
     }
 
@@ -53,6 +53,11 @@ class Browser extends Component {
 
     setMap = () => {
         this.setState({isMap: true, isEdit: false});
+    }
+
+    setView = () => {
+        this.setState({isMap: false, isEdit: false});
+        return(this.renderView);
     }
 
     showImageDetails = (id) => {

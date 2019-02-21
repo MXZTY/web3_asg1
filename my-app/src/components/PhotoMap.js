@@ -57,8 +57,8 @@ class PhotoMap extends React.Component {
               <h2>{photo.city}, {photo.country}</h2>
               <h1>{this.calculateDist(photo.latitude, 0, photo.longitude, 0)}</h1>
               <br />
-              <button>View</button>
-              <button>Edit</button>
+              <button onClick={this.props.setView}>View</button>
+              <button onClick={this.props.setEdit}>Edit</button>
             </div>
           </div>
         </article>
