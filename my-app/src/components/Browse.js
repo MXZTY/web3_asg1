@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PhotoList from './PhotoList.js';
 import ViewPhoto from './ViewPhoto.js';
 import EditPhotoForm from './EditPhotoForm.js';
+import PhotoMap from './PhotoMap.js';
 
                 /* <EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} /> */
 
@@ -16,6 +17,8 @@ class Browser extends Component {
             <section className='container'>
                 <PhotoList photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />
                 {(this.state.isEdit) ? < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setEdit={this.setEdit} /> : <ViewPhoto photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit}/> }
+                {/*<EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />*/}
+                <PhotoMap />
             </section>
         );
     }

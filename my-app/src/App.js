@@ -7,7 +7,6 @@ import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
 
-//Hello Max
 
 const _ = require('lodash');
 
