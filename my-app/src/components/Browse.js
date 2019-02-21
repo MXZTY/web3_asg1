@@ -16,7 +16,7 @@ class Browser extends Component {
         return(
             <section className='container'>
                 <PhotoList photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />
-                {(this.state.isEdit) ? < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setEdit={this.setEdit} /> : <ViewPhoto photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit}/> }
+                {/*(this.state.isEdit) ? < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setEdit={this.setEdit} /> : <ViewPhoto photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit}/> */}
                 {/*<EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />*/}
                 <PhotoMap photos={this.props.photos} currentPhoto={this.state.currentPhoto}/>
             </section>

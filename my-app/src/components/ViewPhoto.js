@@ -22,7 +22,6 @@ class ViewPhoto extends Component{
                             <button onClick={this.props.setEdit}>Edit</button>
                             <button onClick={this.props.setMap}>Map</button>
 
-
                     </p>
 
                     </div>
