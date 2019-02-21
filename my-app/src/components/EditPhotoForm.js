@@ -2,11 +2,13 @@ import React from 'react';
 import './EditPhotoForm.css';
 
 class EditPhotoForm extends React.Component{
+
     render(){
         const id = this.props.currentPhoto
         const imgURL =  `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
         if (this.props.photos.length > 0){
             const photo = this.props.photos.find( p => p.id === id);
+            console.log(id);
             //Trigger the handlChange function when a change is made to any of the fields. 
             return(
                 <article className="details">

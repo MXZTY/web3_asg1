@@ -13,8 +13,8 @@
   --favorites-back: #def2f1;
   --details-back: #feffff;
   --details-box-back: #def2f1;
-  --header-back: #17252A;
-  --button-back: #3aafa9;
+  --header-back: #4817646b;
+  --button-back: #80b9ee;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
 }
@@ -77,9 +77,12 @@ button {
 
 .photos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
+  grid-template-columns: repeat(auto-fit, 270px);
+  width: 100%;
+  max-height: 900px;
   grid-gap: 5px;
   background-color: var(--list-back);
+  overflow-y: scroll;
 }
 
 .photoBox {
@@ -90,10 +93,9 @@ button {
   background-color: var(--list-box-back);
   margin: 0.75rem;
   padding: 0.5rem;
-  place-self: center center;
   justify-content: space-evenly;
+  border-radius: 0.25em;
   
-
 }
 .photoBox button {
   padding: 5px;
@@ -118,12 +120,14 @@ button {
 img.photoThumb {
   width: 100px;
   height: 100px;
+  border-radius: 0.25em;
 }
 
 .details {
   background-color: var(--details-back);
   padding: 0.5em;
-  width: 95%
+  width: 100%;
+  overflow-y: scroll;
 }
 .detailsPhotoBox {
   box-sizing: border-box;
@@ -142,8 +146,16 @@ legend {
   color: var(--list-back);
   font-size: 1.2em;
 }
+
+.photoForm {
+  max-height: 900px;
+  width: auto;
+
+}
+
 .photoForm img {
-   width: 100%
+   max-height: 500px;
+   width: auto;
 }
 
 .favorites {

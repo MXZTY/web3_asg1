@@ -9,6 +9,9 @@ class Home extends React.Component {
                 <div>
                     <h1>Travel Photos</h1>
                     <h3>Upload and Share</h3>
+                    <div>
+                        <img className="logo" src={require('./images/seeThrough.png')} alt='site logo' ></img>
+                    </div>
                     <p>
                         <Link to='/browse'>
                             <button>Browse</button>
