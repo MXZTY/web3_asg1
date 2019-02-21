@@ -14,7 +14,7 @@ class Browser extends Component {
             <section className='container'>
                 <PhotoList photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />
                 {/*<EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />*/}
-                <PhotoMap />
+                <PhotoMap photos={this.props.photos} currentPhoto={this.state.currentPhoto}/>
             </section>
         );
     }
