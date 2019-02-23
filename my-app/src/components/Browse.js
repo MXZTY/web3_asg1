@@ -30,8 +30,8 @@ class Browser extends Component {
         // this.setState({isEdit: true, isMap: false});
         return(
             < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setMap={this.setMap} setView={this.setView}/>
-            );
-        }
+        );
+    }
 
     renderView = () => {
         // this.setState({isEdit: false, isMap: false});

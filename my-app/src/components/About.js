@@ -12,7 +12,7 @@ class About extends React.Component {
                     <h1>A Simple Travel Photo Website</h1>
                     <h3> Created With React</h3>
                     <h4>Images and source code are supplied by Randy Connolly @ funWebDev</h4>
-                    <h4>Logo was created using adobe illustrator and the design was based on a design tutorial, which can be found <Link to='https://www.youtube.com/watch?v=Z2SNeH9v-Ug'>Here</Link></h4>
+                    <h4>Logo was created using adobe illustrator and the design was created following a design tutorial, which can be found <a href='https://www.youtube.com/watch?v=Z2SNeH9v-Ug'>Here</a></h4>
                     <p>
                         <Link to='/browse'>
                             <button>Browse</button>

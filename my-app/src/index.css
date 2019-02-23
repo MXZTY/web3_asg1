@@ -9,12 +9,12 @@
 } */
 
 :root {
-  --list-back: #2b7a78;
-  --favorites-back: #def2f1;
-  --details-back: #feffff;
-  --details-box-back: #def2f1;
-  --header-back: #4817646b;
-  --button-back: #80b9ee;
+  --list-back: #39324B;
+  --favorites-back: #765285;
+  --details-back: #39324B;
+  --details-box-back: #D1D3CF;
+  --header-back: #351C4D;
+  --button-back: #765285;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
 }
@@ -182,7 +182,7 @@ legend {
   align-items: center;
   grid-gap: 5px;
   background: var(--favorites-back);
-  color: var(--header-back);
+  color: white;
   padding: 5px;
   font-size: 0.8em;
   font-weight: bold;
