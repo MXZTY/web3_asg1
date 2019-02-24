@@ -12,17 +12,18 @@ class ViewPhoto extends Component{
                 <article className="details">
                      <div className="detailsPhotoBox">
                         <div className="photoForm">
-                            <img src={imgURL + photo.path} alt={photo.title} />
-                            <h4>Title: </h4><p><i>{photo.title}</i></p>
-                            <h4>City: </h4><p><i>{photo.city}</i></p>
-                            <h4>Country: </h4><p><i>{photo.country}</i></p>
-                        </div>
+                            <img src={imgURL + photo.path} alt={photo.title} /> 
+                            <h3>Title: <i>{photo.title}</i></h3> <br/>
+                            <h3>City: <i>{photo.city}</i></h3><br/>
+                            <h3>Country: <i>{photo.country}</i></h3><br/> 
 
-                    <p className="buttons">
+                            <p className="buttons">
                             <button onClick={this.props.setEdit}>Edit</button>
                             <button onClick={this.props.setMap}>Map</button>
+                            </p>
+                        </div>
 
-                    </p>
+                    
 
                     </div>
                 </article>
