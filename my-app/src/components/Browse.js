@@ -9,13 +9,13 @@ import PhotoMap from './PhotoMap.js';
 class Browser extends Component {
     constructor(props){
         super(props);
-        this.state = {currentPhoto: 1, isEdit: false, isMap: false};
+        this.state = {photos: props.photos, currentPhoto: 1, isEdit: false, isMap: false, queryValue: null};
     }
 
     render(){
         return(
             <section className='container'>
-                {this.filterPhotos(null)}
+                {this.filterPhotos(this.state.queryValue)}
                 {/* <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />  */}
                 {(!this.state.isEdit && !this.state.isMap) ? this.renderView() : null }
                 {(!this.state.isMap && this.state.isEdit) ? this.renderEdit() : null }
@@ -66,22 +66,33 @@ class Browser extends Component {
     }
 
     filterPhotos = (el) => {
+        // if set to null, return full list of photos.
      if(el === null){
             return (
                 <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
             );
     } else if(el.target.name === 'filterCountry') {
            let filtered = this.props.photos.filter((item) => item.country.toLowerCase() === el.target.value.toLowerCase());
+           //clear city input
            document.getElementById('cityInput').value = null;
-  
+           // if no matches, return null
+           if(filtered.length < 1){
+            return null;
+            }
            console.log(filtered.length);
            console.log(filtered);
-           return(
-            <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
-           );
+           this.setState({
+               photos: filtered 
+           });
+        //    return(
+        //     <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+        //    );
     } else if(el.target.name === 'filterCity'){
             let filtered = this.props.photos.filter((item) => item.city.toLowerCase() === el.target.value.toLowerCase());
             document.getElementById('countryInput').value = null;
+            if(filtered.length<1){
+                return null;
+            }
 
            console.log(filtered.length);
            console.log(filtered);
