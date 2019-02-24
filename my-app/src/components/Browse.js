@@ -15,7 +15,8 @@ class Browser extends Component {
     render(){
         return(
             <section className='container'>
-                <PhotoList photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+                {this.filterPhotos(null)}
+                {/* <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />  */}
                 {(!this.state.isEdit && !this.state.isMap) ? this.renderView() : null }
                 {(!this.state.isMap && this.state.isEdit) ? this.renderEdit() : null }
                 {(!this.state.isEdit && this.state.isMap) ? this.renderMap(): null}
@@ -63,6 +64,35 @@ class Browser extends Component {
     showImageDetails = (id) => {
         this.setState({currentPhoto : id, isEdit: false, isMap: false});
     }
+
+    filterPhotos = (el) => {
+     if(el === null){
+            return (
+                <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+            );
+    } else if(el.target.name === 'filterCountry') {
+           let filtered = this.props.photos.filter((item) => item.country.toLowerCase() === el.target.value.toLowerCase());
+           document.getElementById('cityInput').value = null;
+  
+           console.log(filtered.length);
+           console.log(filtered);
+           return(
+            <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+           );
+    } else if(el.target.name === 'filterCity'){
+            let filtered = this.props.photos.filter((item) => item.city.toLowerCase() === el.target.value.toLowerCase());
+            document.getElementById('countryInput').value = null;
+
+           console.log(filtered.length);
+           console.log(filtered);
+           return(
+            <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+           );
+    } else {
+            return null;
+        }
+    }
+
 
 }
 export default Browser;
