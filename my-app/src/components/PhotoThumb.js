@@ -8,21 +8,41 @@ class PhotoThumb extends React.Component{
                     <img src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
                 </figure>
                 <div>
-                    <h3>{this.props.photo.title}</h3>
-                    <p>{this.props.photo.city}, {this.props.photo.country}</p>
-                    <button onClick={ this.handleViewClick}>View</button><button onClick={this.addToFavorites}>❤</button>
+                    <div className="tileInformation">
+                        <h3>{this.props.photo.title}</h3>
+                        <p>{this.props.photo.city}, {this.props.photo.country}</p>
+                    </div>
+                    <div className="buttonContainer">
+                        <div className="buttonStyling">
+                            <button className="buttonItem" onClick={this.setView}>View</button>
+                            <button className="buttonItem" onClick={this.addToFavorites}>❤</button>
+                        </div>
+                        <div className="buttonStyling">
+                            <button className="buttonItem" onClick={this.setEdit}>Edit</button>
+                            <button className="buttonItem" onClick={this.setMap}>Map</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
     }
 
-    handleViewClick = () => {
-        this.props.showImageDetails(this.props.photo.id);
+
+    setEdit = () => {
+        this.props.setEdit(this.props.photo.id);
+    }
+    
+    setMap = () => {
+        this.props.setMap();
+    }
+
+    setView = () => {
+        this.props.setView(this.props.photo.id);
     }
 
     addToFavorites = (e) => {
         console.log(this.props);
-        this.props.addImageToFavorites(this.props.photo.id);   
+        this.props.addImageToFavorites(this.props.photo.id);
     }
 }
 

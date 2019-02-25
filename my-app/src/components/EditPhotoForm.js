@@ -27,7 +27,7 @@ class EditPhotoForm extends React.Component{
                             <input type='text' name='country' onChange={this.handleChange} value={photo.country} />
                         </form>
                         <br />
-                        <button onClick={this.props.setView}>View</button>
+                        <button onClick={this.viewPhoto}>View</button>
                         <button onClick={this.props.setMap}>Map</button>
 
 
@@ -38,6 +38,10 @@ class EditPhotoForm extends React.Component{
            return null;
         }
     }   
+
+    viewPhoto = () =>{
+        this.props.setView(this.props.currentPhoto);
+    }
 
     handleChange = e => {
         //find the current photo in our photo array

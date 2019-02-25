@@ -16,13 +16,9 @@ class Browser extends Component {
         return(
             <section className='container'>
                 {this.filterPhotos(this.state.queryValue)}
-                {/* <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} />  */}
                 {(!this.state.isEdit && !this.state.isMap) ? this.renderView() : null }
                 {(!this.state.isMap && this.state.isEdit) ? this.renderEdit() : null }
                 {(!this.state.isEdit && this.state.isMap) ? this.renderMap(): null}
-
-                {/* {(this.state.isEdit) ? < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setEdit={this.setEdit} /> : <ViewPhoto photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit}/> } */}
-                {/*<EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} />*/}
             </section>
         );
     }
@@ -49,15 +45,20 @@ class Browser extends Component {
     }
 
     setEdit = () => {
+        console.log("Setting the Edit View");
         this.setState({isEdit: true, isMap: false});
+        return(this.renderEdit)
     }
 
     setMap = () => {
+        console.log("Setting the Map View");
         this.setState({isMap: true, isEdit: false});
+        return(this.renderMap);
     }
 
-    setView = () => {
-        this.setState({isMap: false, isEdit: false});
+    setView = (id) => {
+        console.log("Setting the default View");
+        this.setState({currentPhoto: id, isMap: false, isEdit: false});
         return(this.renderView);
     }
 
@@ -69,7 +70,7 @@ class Browser extends Component {
         // if set to null, return full list of photos.
      if(el === null){
             return (
-                <PhotoList filterPhotos={this.filterPhotos} photos={this.props.photos} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+                <PhotoList setView={this.setView} setEdit={this.setEdit} setMap={this.setMap} filterPhotos={this.filterPhotos} photos={this.props.photos} addImageToFavorites={this.props.addImageToFavorites} /> 
             );
     } else if(el.target.name === 'filterCountry') {
            let filtered = this.props.photos.filter((item) => item.country.toLowerCase() === el.target.value.toLowerCase());
@@ -79,8 +80,7 @@ class Browser extends Component {
            if(filtered.length < 1){
             return null;
             }
-           console.log(filtered.length);
-           console.log(filtered);
+
            this.setState({
                photos: filtered 
            });
@@ -94,10 +94,8 @@ class Browser extends Component {
                 return null;
             }
 
-           console.log(filtered.length);
-           console.log(filtered);
            return(
-            <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
+            <PhotoList setView={this.setView} setEdit={this.setEdit} setMap={this.setMap} filterPhotos={this.filterPhotos} photos={filtered} addImageToFavorites={this.props.addImageToFavorites} /> 
            );
     } else {
             return null;

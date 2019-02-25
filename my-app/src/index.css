@@ -257,3 +257,29 @@ legend {
   margin: 5px;
   width: 300px;
 }
+
+.tileInformation {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  min-height: 70px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonStyling {
+  flex-direction: column;
+  margin: 5px;
+  align-items: center;
+}
+
+.buttonItem {
+  flex-direction: row;
+  width: 40px;
+  height: 30px;
+  margin: 5px !important;
+}
+

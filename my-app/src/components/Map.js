@@ -7,8 +7,9 @@ export class MapContainer extends Component {
       <div>
           <Map 
             google={this.props.google}
-            zoom={8}
-            center={{ lat:this.props.center[0], long:this.props.center[1] }}
+            defaultZoom={this.props.zoom}
+            defaultCenter={{lat:'51.0707859,lng', lng:'-113.9340959'}}
+            center={{ lat:this.props.lat, lng:this.props.long }}
             className="mapElement"
           >
               <Marker 

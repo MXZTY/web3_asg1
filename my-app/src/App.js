@@ -72,7 +72,7 @@ class App extends Component {
         <Route path='/browse' exact 
             render={ (props) =>
               <React.Fragment>
-                <Favorites favorites={this.state.favorites} photos={this.state.photos}/>
+                <Favorites favorites={this.state.favorites} photos={this.state.photos} addImageToFavorites={this.addImageToFavorites}/>
                 <Browse photos={this.state.photos} updatePhoto={this.updatePhoto} addImageToFavorites={this.addImageToFavorites}/>
               </React.Fragment>
             }

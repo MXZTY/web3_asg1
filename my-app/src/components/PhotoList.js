@@ -49,8 +49,10 @@ class PhotoList extends React.Component {
             <PhotoThumb
               photo={p}
               key={p.id}
-              showImageDetails={this.props.showImageDetails}
+              setView={this.props.setView}
               addImageToFavorites={this.props.addImageToFavorites}
+              setEdit={this.props.setEdit}
+              setMap={this.props.setMap}
             />
           ))}
         </article>
