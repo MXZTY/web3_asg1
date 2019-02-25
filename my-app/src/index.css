@@ -180,13 +180,13 @@ legend {
 
 .mapElement {
   display: flex;
-  max-width: 500px;
-  max-height: 600px;
+  max-width: 25%;
+  max-height: 80%;
 }
 
 .mapInfo {
-  padding-left: 55%;
-  justify-content: right;
+  flex-direction: column;
+  justify-content: right space-between;
   text-align: right;
 }
 
@@ -195,9 +195,9 @@ legend {
 }
 
 .mapInfo img{
-  width: 100%;
-  height: auto;
-  max-width: 500px;
+  flex-direction: column;
+  max-height: auto;
+  max-width: 47%;
 }
 
 .photoForm img {
