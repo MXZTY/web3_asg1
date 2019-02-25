@@ -13,6 +13,7 @@ class ViewPhoto extends Component{
                      <div className="detailsPhotoBox">
                         <div className="photoForm">
                             <img src={imgURL + photo.path} alt={photo.title} /> 
+                            <br/>
                             <h3>Title: <i>{photo.title}</i></h3> <br/>
                             <h3>City: <i>{photo.city}</i></h3><br/>
                             <h3>Country: <i>{photo.country}</i></h3><br/> 
