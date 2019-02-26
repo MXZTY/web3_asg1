@@ -8,13 +8,13 @@ export class MapContainer extends Component {
           <Map 
             google={this.props.google}
             defaultZoom={this.props.zoom}
-            defaultCenter={{lat:'51.0707859,lng', lng:'-113.9340959'}}
-            center={{ lat:this.props.lat, lng:this.props.long }}
+            initialCenter={{ lat:this.props.lat, lng:this.props.long }}
             className="mapElement"
           >
               <Marker 
                 name={this.props.city}
                 position={{ lat:this.props.lat, lng:this.props.long }}
+
               />
           </Map>      
       </div>
