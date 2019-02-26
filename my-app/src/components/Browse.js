@@ -40,19 +40,22 @@ class Browser extends Component {
     renderMap = () => {
         // this.setState({isEdit: false, isMap: true});
         return(
-            <PhotoMap photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit} setView={this.setView}/> 
+            <PhotoMap key={this.state.currentPhoto} photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit} setView={this.setView}/> 
         );
     }
 
-    setEdit = () => {
+    setEdit = (id) => {
         console.log("Setting the Edit View");
-        this.setState({isEdit: true, isMap: false});
+        this.setState({currentPhoto: id, isEdit: true, isMap: false});
         return(this.renderEdit)
     }
 
-    setMap = () => {
+    setMap = (id) => {
         console.log("Setting the Map View");
-        this.setState({isMap: true, isEdit: false});
+        if(this.isMap === true){
+            this.setState({currentPhoto: id, isMap: false, isEdit: false});
+        }
+        this.setState({currentPhoto: id, isMap: true, isEdit: false});
         return(this.renderMap);
     }
 

@@ -33,7 +33,7 @@ class PhotoThumb extends React.Component{
     }
     
     setMap = () => {
-        this.props.setMap();
+        this.props.setMap(this.props.photo.id);
     }
 
     setView = () => {

@@ -14,7 +14,7 @@ export class MapContainer extends Component {
               <Marker 
                 name={this.props.city}
                 position={{ lat:this.props.lat, lng:this.props.long }}
-
+                center={{lat:this.props.lat, lng:this.props.long}}
               />
           </Map>      
       </div>
