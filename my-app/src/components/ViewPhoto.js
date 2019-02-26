@@ -19,8 +19,8 @@ class ViewPhoto extends Component{
                             <h3>Country: <i>{photo.country}</i></h3><br/> 
 
                             <p className="buttons">
-                            <button onClick={this.props.setEdit}>Edit</button>
-                            <button onClick={this.props.setMap}>Map</button>
+                            <button onClick={this.setEdit}>Edit</button>
+                            <button onClick={this.setMap}>Map</button>
                             </p>
                         </div>
 
@@ -32,8 +32,14 @@ class ViewPhoto extends Component{
         } else{
             return null;
         }
+    }
 
+    setEdit = () => {
+        this.props.setEdit(this.props.currentPhoto);
+    }
 
+    setMap = () => {
+        this.props.setMap(this.props.currentPhoto);
     }
 
 }

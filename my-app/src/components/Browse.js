@@ -4,14 +4,17 @@ import ViewPhoto from './ViewPhoto.js';
 import EditPhotoForm from './EditPhotoForm.js';
 import PhotoMap from './PhotoMap.js';
 
-                /* <EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} /> */
 
 class Browser extends Component {
+
+    // default the current photo value to 1, and set the default view to photoview, and no queryValue(filter). 
     constructor(props){
         super(props);
         this.state = {photos: props.photos, currentPhoto: 1, isEdit: false, isMap: false, queryValue: null};
     }
 
+    // Render the filtered Photo list
+    // also conditional rendering based on what view is set in the state (map view, edit view, or photo view)
     render(){
         return(
             <section className='container'>
@@ -23,44 +26,49 @@ class Browser extends Component {
         );
     }
 
+    // this function returns the EditPhotoForm, and requires the setMap and setView as props to change the view. 
     renderEdit = () => {
-        // this.setState({isEdit: true, isMap: false});
         return(
             < EditPhotoForm photos={this.props.photos} currentPhoto={this.state.currentPhoto} updatePhoto={this.props.updatePhoto} setMap={this.setMap} setView={this.setView}/>
         );
     }
 
+    // this function returns the viewphoto component, the setEdit and setMap are required as props to change the view
     renderView = () => {
-        // this.setState({isEdit: false, isMap: false});
         return(
             <ViewPhoto photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit} setMap={this.setMap}/>
         );
     }
 
+    // *****Issues we had with centering and rerendering the map where resolved by simply adding the key to the props... ¯\_(ツ)_/¯
+    // ***adding a key value forces the map to rerender***
+    // credit to : **[istarkov](/istarkov) ** commented [on Dec 15, 2015](#issuecomment-164833277) @ https://github.com/google-map-react/google-map-react/issues/76
     renderMap = () => {
-        // this.setState({isEdit: false, isMap: true});
         return(
             <PhotoMap key={this.state.currentPhoto} photos={this.props.photos} currentPhoto={this.state.currentPhoto} setEdit={this.setEdit} setView={this.setView}/> 
         );
     }
 
+    // function for setting the state to the edit view for the photo id provided. 
+    // returns the render edit function above after the state is set to the new id
     setEdit = (id) => {
-        console.log("Setting the Edit View");
+        console.log("Setting the Edit View for Photo: " + id);
         this.setState({currentPhoto: id, isEdit: true, isMap: false});
         return(this.renderEdit)
     }
 
+    // function for setting the state to the map view for the photo id provided. 
+    // returns the render map function above after the state is set to the new id.
     setMap = (id) => {
-        console.log("Setting the Map View");
-        if(this.isMap === true){
-            this.setState({currentPhoto: id, isMap: false, isEdit: false});
-        }
+        console.log("Setting the Map View for Photo: " + id);
         this.setState({currentPhoto: id, isMap: true, isEdit: false});
         return(this.renderMap);
     }
 
+    // function for setting the state to the regular view for the photo id provided. 
+    // returns the render view function above after the state is set to the new id. 
     setView = (id) => {
-        console.log("Setting the default View");
+        console.log("Setting the default View for Photo: " + id);
         this.setState({currentPhoto: id, isMap: false, isEdit: false});
         return(this.renderView);
     }
@@ -77,8 +85,10 @@ class Browser extends Component {
             );
     } else if(el.target.name === 'filterCountry') {
            let filtered = this.props.photos.filter((item) => item.country.toLowerCase() === el.target.value.toLowerCase());
+           
            //clear city input
            document.getElementById('cityInput').value = null;
+           
            // if no matches, return null
            if(filtered.length < 1){
             return null;
@@ -87,9 +97,6 @@ class Browser extends Component {
            this.setState({
                photos: filtered 
            });
-        //    return(
-        //     <PhotoList filterPhotos={this.filterPhotos} photos={filtered} showImageDetails={this.showImageDetails} addImageToFavorites={this.props.addImageToFavorites} /> 
-        //    );
     } else if(el.target.name === 'filterCity'){
             let filtered = this.props.photos.filter((item) => item.city.toLowerCase() === el.target.value.toLowerCase());
             document.getElementById('countryInput').value = null;

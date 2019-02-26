@@ -8,7 +8,9 @@ class FavoriteItem extends React.Component {
             <div className='flex-container'>
                 <figure style={this.styleFigure}>
                     <img src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
-                    <button onClick={this.addImageToFavorites} style={this.stylex} >X</button>
+                    <button onClick={this.addImageToFavorites} style={this.stylex} >
+                        X
+                    </button>
                 </figure>
             </div>
         );

@@ -33,10 +33,6 @@ class PhotoMap extends React.Component {
     return ((R * c)/1000).toFixed(2);
   };
 
-  viewPhoto = () =>{
-    this.props.setView(this.props.currentPhoto);
-  }
-
   render() {
 
     const updateCoord= (lat, long) => {
@@ -55,9 +51,6 @@ class PhotoMap extends React.Component {
         });
       }
     })(this);
-
-    
-
     //get current photo
     const id = this.props.currentPhoto;
     const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
@@ -88,8 +81,8 @@ class PhotoMap extends React.Component {
                 {this.calculateDist(photo.latitude, this.state.lat, photo.longitude, this.state.long)} KM from current location
               </h1>
               <br />
-              <button onClick={this.viewPhoto}>View</button>
-              <button onClick={this.props.setEdit}>Edit</button>
+              <button onClick={this.setView}>View</button>
+              <button onClick={this.setEdit}>Edit</button>
             </div>
           </div>
         </article>
@@ -98,6 +91,16 @@ class PhotoMap extends React.Component {
       return null;
     }
   }
+
+  setView = () =>{
+    this.props.setView(this.props.currentPhoto);
+  }
+
+  setEdit = () => {
+    this.props.setEdit(this.props.currentPhoto);
+  }
+
+
 }
 
 export default PhotoMap;

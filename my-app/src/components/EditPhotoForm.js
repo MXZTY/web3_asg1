@@ -16,21 +16,16 @@ class EditPhotoForm extends React.Component{
                         <form className="photoForm">
                             <legend> Edit Photo Details </legend>
                             <img src={imgURL + photo.path} alt={photo.title} />
-
                             <label>Title</label>
                             <input type='text' name='title' onChange={this.handleChange} value={photo.title} />
-
                             <label>City</label>
                             <input type='text' name='city' onChange={this.handleChange} value={photo.city} />
-
                             <label>Country</label>
                             <input type='text' name='country' onChange={this.handleChange} value={photo.country} />
                         </form>
                         <br />
-                        <button onClick={this.viewPhoto}>View</button>
-                        <button onClick={this.props.setMap}>Map</button>
-
-
+                        <button onClick={this.setView}>View</button>
+                        <button onClick={this.setMap}>Map</button>
                     </div>
                 </article>
             );
@@ -39,8 +34,14 @@ class EditPhotoForm extends React.Component{
         }
     }   
 
-    viewPhoto = () =>{
+    // function for calling the parent setView to change the view to Photo View with the current Photo id. 
+    setView = () =>{
         this.props.setView(this.props.currentPhoto);
+    }
+
+    // function for calling the parent set map to change the view to Map View with the current Photo id. 
+    setMap = () => {
+        this.props.setMap(this.props.currentPhoto);
     }
 
     handleChange = e => {

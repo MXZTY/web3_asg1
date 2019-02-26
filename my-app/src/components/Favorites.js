@@ -10,7 +10,7 @@ import download from "image-downloader";
 class Favorites extends React.Component {
 
     state = {
-        displayButton:"No"
+        displayButton: false
     }
   
   //generate a zip file
@@ -38,12 +38,17 @@ class Favorites extends React.Component {
   };
 
   
-
+  // a conditional id is added to the favorites and download button
+  // so that if the favorites array is empty, the user is not given an option to download,
+  // and doesnt have a blank bar on the top of their screen 
   render() {
     return (
-      <section className="favorites">
-        <div>
-          <p> ❤ Favorites</p>
+      <section className="favorites flex-container-row">
+        <div className="flex-item-favorites" id={this.props.favorites < 1 ? 'Hide' : 'Show'}>
+          <h3> ❤ Favorites</h3><br/>
+          <button className="flex-button" id={this.props.favorites < 1 ? 'Hide' : 'Show'} onClick={this.genZip}>
+          Download 
+        </button>
         </div>
         {this.props.favorites.map(f => {
           return (
@@ -54,7 +59,7 @@ class Favorites extends React.Component {
             />
           );
         })}
-        <button className="flex-button" onClick={this.genZip}>Download</button>
+
       </section>
     );
   }
