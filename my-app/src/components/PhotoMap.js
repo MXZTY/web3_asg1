@@ -9,11 +9,12 @@ class PhotoMap extends React.Component {
     this.state={
       lat:0,
       long:0,
-      photos: this.props.photos
+      photos: this.props.photos,
     };
   }
 
   //calculate distance between photo location and user location
+  //credit: haversine formula
   calculateDist = (lat1, lat2, lon1, lon2) => {
     function toRad(Value) {
       /** Converts numeric degrees to radians */
@@ -30,27 +31,13 @@ class PhotoMap extends React.Component {
       Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return ((R * c)/1000).toFixed(2);
+    return ((R * c)/1000).toFixed(2);//to km
   };
+
+  
 
   render() {
 
-    const updateCoord= (lat, long) => {
-      this.setState({
-        lat,
-        long
-      })
-    }
-
-    //get user location
-    (function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(p => {
-          //update Coord
-          updateCoord( p.coords.latitude, p.coords.longitude);
-        });
-      }
-    })(this);
     //get current photo
     const id = this.props.currentPhoto;
     const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
@@ -78,7 +65,7 @@ class PhotoMap extends React.Component {
                 {photo.city}, {photo.country}
               </h1>
               <h1>
-                {this.calculateDist(photo.latitude, this.state.lat, photo.longitude, this.state.long)} KM from current location
+                {this.calculateDist(photo.latitude, this.props.userLat, photo.longitude, this.props.userLong)} KM from current location
               </h1>
               <br />
               <button onClick={this.setView}>View</button>
