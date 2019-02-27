@@ -21,7 +21,7 @@ class Favorites extends React.Component {
     let folder = zip.folder("favorites")
     let count = 0;
 
-    console.log("DOWNLOADING NOW! PLEASE BE PATIENT");
+    console.log("downloading Now");
 
     for( let i of this.props.favorites){
       let url = `https://cors-anywhere.herokuapp.com/storage.googleapis.com/funwebdev-3rd-travel/large/${

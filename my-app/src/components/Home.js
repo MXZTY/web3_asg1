@@ -7,8 +7,8 @@ class Home extends React.Component {
         return (
             <div className="banner">
                 <div>
-                    <h1>Travel Photos</h1>
-                    <h3>Upload and Share</h3>
+                    <h1>The Travelers Journal</h1>
+                    <h3>Create React App</h3>
                     <div>
                         <img className="logo" src={require('./images/seeThrough.png')} alt='site logo' />
                     </div>
