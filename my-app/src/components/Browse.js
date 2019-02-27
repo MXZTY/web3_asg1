@@ -18,7 +18,7 @@ class Browser extends Component {
     render(){
         return(
             <section className='container'>
-                {this.filterPhotos(this.state.queryValue)}
+                <PhotoList setView={this.setView} setEdit={this.setEdit} setMap={this.setMap} filterPhotos={this.filterPhotos} photos={this.props.photos} addImageToFavorites={this.props.addImageToFavorites} deletePhoto={this.deletePhoto}/>
                 {(!this.state.isEdit && !this.state.isMap) ? this.renderView() : null }
                 {(!this.state.isMap && this.state.isEdit) ? this.renderEdit() : null }
                 {(!this.state.isEdit && this.state.isMap) ? this.renderMap(): null}
@@ -49,6 +49,20 @@ class Browser extends Component {
         );
     }
 
+
+    deletePhoto = (id) => {
+        if(id === this.state.currentPhoto){
+            console.log(id + 1,  " asldkjfl   " , this.state.currentPhoto);
+
+            this.props.deletePhoto(id);
+            this.setState({currentPhoto: parseInt(id+1) });
+            this.setView(id + 1);
+        } 
+        this.props.deletePhoto(id);
+        
+    }
+
+
     // function for setting the state to the edit view for the photo id provided. 
     // returns the render edit function above after the state is set to the new id
     setEdit = (id) => {
@@ -76,42 +90,6 @@ class Browser extends Component {
     showImageDetails = (id) => {
         this.setState({currentPhoto : id, isEdit: false, isMap: false});
     }
-
-    filterPhotos = (el) => {
-        // if set to null, return full list of photos.
-     if(el === null){
-            return (
-                <PhotoList setView={this.setView} setEdit={this.setEdit} setMap={this.setMap} filterPhotos={this.filterPhotos} photos={this.props.photos} addImageToFavorites={this.props.addImageToFavorites} /> 
-            );
-    } else if(el.target.name === 'filterCountry') {
-           let filtered = this.props.photos.filter((item) => item.country.toLowerCase() === el.target.value.toLowerCase());
-           
-           //clear city input
-           document.getElementById('cityInput').value = null;
-           
-           // if no matches, return null
-           if(filtered.length < 1){
-            return null;
-            }
-
-           this.setState({
-               photos: filtered 
-           });
-    } else if(el.target.name === 'filterCity'){
-            let filtered = this.props.photos.filter((item) => item.city.toLowerCase() === el.target.value.toLowerCase());
-            document.getElementById('countryInput').value = null;
-            if(filtered.length<1){
-                return null;
-            }
-
-           return(
-            <PhotoList setView={this.setView} setEdit={this.setEdit} setMap={this.setMap} filterPhotos={this.filterPhotos} photos={filtered} addImageToFavorites={this.props.addImageToFavorites} /> 
-           );
-    } else {
-            return null;
-        }
-    }
-
 
 }
 export default Browser;

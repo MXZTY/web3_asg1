@@ -14,8 +14,10 @@ class PhotoList extends React.Component {
   updateSearch=(e)=>{
     //if country changed
     if(e.target.id==="countryInput"){
+      document.getElementById('cityInput').value = null;
       this.setState({search: e.target.value, input:"Country"})
     }else{//city changed
+      document.getElementById('countryInput').value = null;
       this.setState({search: e.target.value, input:"City"})
     }
   }
@@ -37,7 +39,7 @@ class PhotoList extends React.Component {
       return (
         <div className="flex-container">
           <div className="filterBy flex-box">
-           <h2 className="flex-title"> Filter By</h2>
+           <h2 className="flex-title"> Filter By:</h2>
              <input id="countryInput" className="flex-item" name="filterCountry" type="text" placeholder="Country" onChange={this.updateSearch}/> 
              <input id="cityInput" className="flex-item" name="filterCity" type="text" placeholder="City" onChange={this.updateSearch}/>
           </div>
@@ -51,6 +53,7 @@ class PhotoList extends React.Component {
               key={p.id}
               setView={this.props.setView}
               addImageToFavorites={this.props.addImageToFavorites}
+              deletePhoto={this.props.deletePhoto}
               setEdit={this.props.setEdit}
               setMap={this.props.setMap}
             />

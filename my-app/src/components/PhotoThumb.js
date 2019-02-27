@@ -4,11 +4,12 @@ class PhotoThumb extends React.Component{
         const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${this.props.photo.path}`;
         return(
             <div className="photoBox" onClick={ this.handleViewClick }>
-                <figure>
-                    <img src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
+                <figure style={this.styleFigure}>
+                    <button className="buttonItem-delete" style={this.stylex} onClick={this.deletePhoto}>X</button>
+                    <img onClick={this.setView} src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
                 </figure>
-                <div>
-                    <div className="tileInformation">
+                <div className="tileInformation">
+                    <div className="tileTitles" >
                         <h3>{this.props.photo.title}</h3>
                         <p>{this.props.photo.city}, {this.props.photo.country}</p>
                     </div>
@@ -27,6 +28,25 @@ class PhotoThumb extends React.Component{
         );
     }
 
+    styleFigure={
+        position: "relative"
+    }
+
+    stylex={
+        background: "#39324B",
+        borderRadius: "1em", 
+        maxWidth: "40px",
+        maxHeight: "40px",
+        position: "absolute", 
+        padding: "5px",
+        top: "5px",
+        right: "0.5px"
+    }
+
+
+    deletePhoto = (e) => {
+        this.props.deletePhoto(this.props.photo.id);
+    }
 
     setEdit = () => {
         this.props.setEdit(this.props.photo.id);

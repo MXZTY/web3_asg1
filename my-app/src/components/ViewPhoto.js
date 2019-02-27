@@ -3,9 +3,9 @@ import './EditPhotoForm.css';
 
 class ViewPhoto extends Component{
     render(){
+        console.log(this.props.currentPhoto + " IS THE CURRENT PHOTO IN PHOTOVIEW");
         const id = this.props.currentPhoto;
         const imgURL =  `https://storage.googleapis.com/funwebdev-3rd-travel/medium/`;
-        console.log(id);
         if(this.props.photos.length > 0){
             const photo = this.props.photos.find(p => p.id === id);
             return(

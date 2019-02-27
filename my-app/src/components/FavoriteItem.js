@@ -6,8 +6,8 @@ class FavoriteItem extends React.Component {
         const imgURL = `https://storage.googleapis.com/funwebdev-3rd-travel/square-medium/${this.props.photo.path}`;
         return (
             <div className='flex-container'>
-                <figure style={this.styleFigure}>
-                    <img src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title} />
+                <figure style={this.styleFigure} >
+                    <img src={imgURL} className="photoThumb" title={this.props.photo.title} alt={this.props.photo.title}/>
                     <button onClick={this.addImageToFavorites} style={this.stylex} >
                         X
                     </button>
