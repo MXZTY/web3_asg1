@@ -45,24 +45,24 @@ class App extends Component {
     console.log("DELETING PHOTO " + id);
     let copyPhotos = cloneDeep(this.state.photos);
     let photoToDelete = copyPhotos.find(p => p.id === id);
-
+    
     if(photoToDelete !== null) { 
       console.log("boop beep" + photoToDelete.id);
       let filteredPhotos = _.remove(copyPhotos, (photoToDelete) => {
           return photoToDelete.id !== id;
-      });
-      // if the item is also in favorites list, delete it from there as well. 
-      if(this.state.favorites.find(f => f.id === id)){
-        //Create a deep clone of the favorites array stored in state using lodash/cloneDeep
-        const copyFavorites = cloneDeep(this.state.favorites);
-        // use the lodash remove function to remove the item the matches the id of the focused item. 
-        _.remove(copyFavorites, (favoriteItem) => {
-          return favoriteItem.id === id;
-        });
-
-      this.setState({photos: filteredPhotos, favorites: copyFavorites});
-    }
+    });
+    this.setState({photos: filteredPhotos});
   }
+    if(this.state.favorites.find(f => f.id === id)){
+      //Create a deep clone of the favorites array stored in state using lodash/cloneDeep
+      const copyFavorites = cloneDeep(this.state.favorites);
+      // use the lodash remove function to remove the item the matches the id of the focused item. 
+      _.remove(copyFavorites, (favoriteItem) => {
+        return favoriteItem.id === id;
+      });
+
+      this.setState({favorites: copyFavorites});
+      }
   }
 
   addImageToFavorites = (id) => {

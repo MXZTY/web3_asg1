@@ -56,10 +56,9 @@ class Browser extends Component {
 
             this.props.deletePhoto(id);
             this.setState({currentPhoto: parseInt(id+1) });
-            this.setView(id + 1);
-        } 
-        this.props.deletePhoto(id);
-        
+        } else {
+            this.props.deletePhoto(id);
+        }
     }
 
 
