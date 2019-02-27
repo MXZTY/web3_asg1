@@ -15,68 +15,34 @@ class Favorites extends React.Component {
 
   //generate a zip file
   genZip = () => {
+    
     //create zip instance
     let zip = new JSZip();
-    let favorites = zip.folder("favorites");
+    let folder = zip.folder("favorites")
+    let count = 0;
+
+    console.log("DOWNLOADING NOW! PLEASE BE PATIENT");
 
     for( let i of this.props.favorites){
-      let url = `https://cors-anywhere.herokuapp.com/storage.googleapis.com/funwebdev-3rd-travel/medium/${
+      let url = `https://cors-anywhere.herokuapp.com/storage.googleapis.com/funwebdev-3rd-travel/large/${
               i.path
       }`;
-      let tempZip = new JSZip();
 
       utils.getBinaryContent(url, (err, data) => {
         if (err) {
           console.log(err);
-        } else {
-          favorites.file(i.path, data, {binary:true});
-              //add to the zip folder
+        } 
+        folder.file(i.path, data, {binary:true});
+        count ++;
+         //add to the zip folder if we have added them all
+        if (count === this.props.favorites.length){
           zip.generateAsync({ type: "blob"}).then((content) => {
-            console.log(favorites);
-            console.log(content);
-            saveAs(content, favorites.favorites);
-           });
+            saveAs(content, "favorites.zip");
+          });
         }
-        });
-        
-    }
-
-    // generate the zip file
-    // zip.generateAsync({ type: "blob"}).then((content) => {
-    //   console.log(content);
-    //   saveAs(content, folder);
-    // });
+      });
+    };  
   }
-
-  //   //if blank
-  //   this.props.favorites.map(p => {
-  //     //the heroku url prevents the error we get with fetch
-  //     let url = `https://cors-anywhere.herokuapp.com/storage.googleapis.com/funwebdev-3rd-travel/medium/${
-  //       p.path
-  //     }`;
-
-  //     //get binary data of image
-
-  //     utils.getBinaryContent(url, (err, data) => {
-  //       if (err) {
-  //         console.log(err);
-  //       } else {
-  //         folder.file(p.path, data, {binary:true});
-  //             //add to the zip folder
-  //             // folder.generateAsync({ type: "blob"}).then((content) => {
-  //             //   console.log(content);
-  //             //   saveAs(content, folder.favorites);
-  //             // });
-  //       }
-  //       });
-  //   });
-
-  //   //generate the zip file
-  //   // zip.generateAsync({ type: "blob"}).then((content) => {
-  //   //   console.log(content);
-  //   //   saveAs(content, "Favorites.zip");
-  //   // });
-  // };
 
   // a conditional id is added to the favorites and download button
   // so that if the favorites array is empty, the user is not given an option to download,
