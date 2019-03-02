@@ -6,6 +6,7 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 
 const _ = require('lodash');
@@ -23,8 +24,24 @@ class App extends Component {
       const response = await fetch(url);
       const jsonData = await response.json();
       this.setState( { photos: jsonData } );
+      // call the update state with local storage method to restore the user favorited photos.
+      await this.updateStateWithLocalStorage();
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  updateStateWithLocalStorage = () => {
+    // if the local storage length is 0 there are no favorited photos stored in localStorage. 
+    if(localStorage.length > 0) {      
+      // for each of the items in the localStorage, iterate through.
+      for(let i = 0; i < localStorage.length; i++){
+        // pass in the parse key value to the addImageToFavorites to add it to the favorites bar. 
+        // this will take in the updated values of that photo too if they have been changed on the server,
+        // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites. 
+        this.addImageToFavorites(JSON.parse(localStorage.key(i)));
+      }
+
     }
   }
 
@@ -70,10 +87,16 @@ class App extends Component {
     const copyFavorites = cloneDeep(this.state.favorites);
     //create a favorite Item by finding the photo object based on the id
     const favoriteItem = this.state.photos.find( p => p.id === id);
+
+    localStorage.setItem(id, JSON.stringify(favoriteItem));
+
+
     //if the item is already in the favorites list, remove the item when the favorite button is pressed.  
     if(this.state.favorites.find(f => f.id === id)){
       console.log('you are unfavoriting' + favoriteItem);
       console.log(this.state.favorites);
+
+      localStorage.removeItem(id);
       // use the lodash remove function to remove the item the matches the id of the focused item. 
       _.remove(copyFavorites, (favoriteItem) => {
         return favoriteItem.id === id;
@@ -82,6 +105,9 @@ class App extends Component {
       // if the item is not in the favorite list, simply push it onto the temp array. 
       copyFavorites.push(favoriteItem);
     }
+
+    
+
     // set the favorites array stored in state to the newly updated favorites list. 
     this.setState({favorites: copyFavorites});
   }
