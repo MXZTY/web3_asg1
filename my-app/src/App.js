@@ -6,7 +6,6 @@ import Favorites from './components/Favorites';
 import * as cloneDeep from 'lodash/cloneDeep';
 import About from './components/About.js';
 import { Route } from 'react-router-dom';
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 
 const _ = require('lodash');
@@ -23,9 +22,12 @@ class App extends Component {
       const url = "http://randyconnolly.com/funwebdev/services/travel/images.php";
       const response = await fetch(url);
       const jsonData = await response.json();
+      this.loading = true;
       this.setState( { photos: jsonData } );
       // call the update state with local storage method to restore the user favorited photos.
       await this.updateStateWithLocalStorage();
+      this.loading = false;
+      // localStorage.clear();
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +41,7 @@ class App extends Component {
         // pass in the parse key value to the addImageToFavorites to add it to the favorites bar. 
         // this will take in the updated values of that photo too if they have been changed on the server,
         // rather than using the informatio stored in local storage for each photo it only uses the id to call the addToFavorites. 
-        this.addImageToFavorites(JSON.parse(localStorage.key(i)));
+        this.addImageToFavorites(JSON.parse(localStorage.key(i)), true);
       }
 
     }
@@ -64,7 +66,6 @@ class App extends Component {
     let photoToDelete = copyPhotos.find(p => p.id === id);
     
     if(photoToDelete !== null) { 
-      console.log("boop beep" + photoToDelete.id);
       let filteredPhotos = _.remove(copyPhotos, (photoToDelete) => {
           return photoToDelete.id !== id;
     });
@@ -82,7 +83,7 @@ class App extends Component {
       }
   }
 
-  addImageToFavorites = (id) => {
+  addImageToFavorites = (id, loading=false) => {
     //Create a deep clone of the favorites array stored in state using lodash/cloneDeep
     const copyFavorites = cloneDeep(this.state.favorites);
     //create a favorite Item by finding the photo object based on the id
@@ -90,11 +91,10 @@ class App extends Component {
 
     localStorage.setItem(id, JSON.stringify(favoriteItem));
 
-
-    //if the item is already in the favorites list, remove the item when the favorite button is pressed.  
-    if(this.state.favorites.find(f => f.id === id)){
+    //if the item is already in the favorites list, remove the item when the favorite button is pressed.
+    // do not remove the item from favorites if loading is set to true  
+    if(this.state.favorites.find(f => f.id === id) && !loading){
       console.log('you are unfavoriting' + favoriteItem);
-      console.log(this.state.favorites);
 
       localStorage.removeItem(id);
       // use the lodash remove function to remove the item the matches the id of the focused item. 

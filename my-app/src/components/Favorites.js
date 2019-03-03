@@ -3,9 +3,8 @@ import FavoriteItem from "./FavoriteItem";
 import "../index.css";
 import JSZip from "jszip";
 import utils from "jszip-utils";
-import file, { saveAs } from "file-saver";
-import { binary } from "jszip/lib/defaults";
-import download, { image } from "image-downloader";
+import { saveAs } from "file-saver";
+
 
 // this class outputs the array of favorites passed in from App.js via props each item in the array is outputted as a FavoriteItem.
 class Favorites extends React.Component {
@@ -28,6 +27,7 @@ class Favorites extends React.Component {
               i.path
       }`;
 
+      // eslint-disable-next-line
       utils.getBinaryContent(url, (err, data) => {
         if (err) {
           console.log(err);
